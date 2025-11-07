@@ -5,7 +5,7 @@ import AppLayout from "./layout/AppLayout";
 import Homepage from "./pages/Homepage/Homepage";
 import MoviePage from "./pages/Movies/MoviePage";
 import MovieDetailPage from "./pages/MoviesDetail/MovieDetailPage";
-import NotFoundPage from "./pages/NotFoundPAge/NotFoundPage";
+import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 
 
 function App() {
