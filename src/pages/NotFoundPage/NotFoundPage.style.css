@@ -1,0 +1,45 @@
+
+
+.notfound-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #f9fafb;
+  color: #333;
+  font-family: "Pretendard", "Noto Sans KR", sans-serif;
+  text-align: center;
+  padding: 20px;
+}
+
+.notfound-title {
+  font-size: 6rem;
+  font-weight: 800;
+  color: #2563eb; /* 파란색 포인트 */
+  margin-bottom: 10px;
+}
+
+.notfound-text {
+  font-size: 1.25rem;
+  margin-bottom: 30px;
+  color: #6b7280; /* 중간 회색 */
+}
+
+.notfound-button {
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #fff;
+  background-color: #2563eb;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.notfound-button:hover {
+  background-color: #1d4ed8;
+  transform: translateY(-2px);
+  box-shadow: 0px 4px 10px rgba(37, 99, 235, 0.3);
+}
