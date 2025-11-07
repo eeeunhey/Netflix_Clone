@@ -20,7 +20,7 @@ function App() {
             <Route index element={<MoviePage />} />
             <Route path=":id" element={<MovieDetailPage />} />
 
-            {/* 필요 시 상세 하위 라우트 예시 */}
+
             <Route path=":id/recommendation" element={<div>추천 영화</div>} />
             <Route path=":id/reviews" element={<div>리뷰 목록</div>} />
           </Route>
