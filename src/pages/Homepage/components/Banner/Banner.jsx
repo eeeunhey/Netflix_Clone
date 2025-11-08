@@ -7,7 +7,7 @@ const Banner = () => {
     const {data, isLoading, isError, error} =usePopularMoivesQuery();
     console.log("data",data);
     if(isLoading) {
-        <h1>Loading.....</h1>
+        return <h1>Loading.....</h1>
     }
 
     if(isError) {
@@ -19,7 +19,10 @@ const Banner = () => {
     }}
     className="banner"
     >
-        Banner
+       <div>
+        <h1>{data.results[0].title}</h1>
+        <p>{data.results[0].overview}</p>
+       </div>
     </div>
   )
 }
