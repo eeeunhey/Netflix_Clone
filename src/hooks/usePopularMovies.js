@@ -13,6 +13,7 @@ const fetchPopularMovies = () => {
 export const usePopularMoivesQuery = () => {
   return useQuery({
     queryKey: ["moive-popular"],
-    queryFn: fetchPopularMovies
+    queryFn: fetchPopularMovies,
+    select:(result)=>result.data
   });
 };
