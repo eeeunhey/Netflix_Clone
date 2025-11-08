@@ -1,4 +1,8 @@
+
+
+# ------------------------
 # Logs
+# ------------------------
 logs
 *.log
 npm-debug.log*
@@ -6,19 +10,79 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
+*.pid
+*.seed
+*.pid.lock
 
-node_modules
-dist
-dist-ssr
+# ------------------------
+# Dependency & Build
+# ------------------------
+node_modules/
+dist/
+dist-ssr/
 *.local
+# Vite cache
+.vite/
+# Storybook cache (있다면)
+node_modules/.cache/storybook/
 
-# Editor directories and files
+# ------------------------
+# Environment (keep example only)
+# ------------------------
+.env
+.env.*.local
+.env.local
+# keep templates
+!.env.example
+
+# ------------------------
+# Test / Coverage / E2E
+# ------------------------
+coverage/
+.cypress-cache/
+cypress/screenshots/
+cypress/videos/
+playwright-report/
+test-results/
+blob-report/
+
+# ------------------------
+# Tool caches
+# ------------------------
+.eslintcache
+.stylelintcache
+.turbo/
+.parcel-cache/
+
+# ------------------------
+# Editors / IDE
+# ------------------------
 .vscode/*
 !.vscode/extensions.json
-.idea
-.DS_Store
+!.vscode/settings.json
+.idea/
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+.history/
+
+# ------------------------
+# OS-specific
+# ------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+Icon?
+
+# ------------------------
+# Package artifacts
+# ------------------------
+*.tgz
+
+# ------------------------
+# Hosting (optional: 사용 시 해제)
+# ------------------------
+.vercel/
+.netlify/
