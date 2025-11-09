@@ -22,7 +22,29 @@
 }
 
 .movie-card:hover {
-  transform: scale(1.15);
-  z-index: 3;
+  transform: scale(1.2);
+  z-index: 2;
+}
 
+
+.movie-info {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  display: flex;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.movie-info .badge {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.movie-info .age {
+  color: #d9534f; 
+  font-weight: 700;
 }

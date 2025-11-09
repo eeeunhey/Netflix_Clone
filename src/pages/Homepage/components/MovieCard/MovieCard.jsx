@@ -14,7 +14,7 @@ const MovieCard = ({ movie }) => {
       className="movie-card"
     >
       <div className="overlay">
-        <div >
+        <div>
           <h1>{movie.title}</h1>
           {movie.genre_ids.map((id) => (
             <Badge badgeContent={4} color="error">
@@ -22,10 +22,10 @@ const MovieCard = ({ movie }) => {
             </Badge>
           ))}
         </div>
-        <div>
-          <div>{movie.vote_average}</div>
-          <div>{movie.popularity}</div>
-          <div>{movie.adult ? "over18" : "under18"}</div>
+        <div className="movie-info">
+          <div className="badge">{movie.vote_average}</div>
+          <div className="badge">{Math.round(movie.popularity)}</div>
+          <div className="age">{movie.adult ? "18+" : "ALL"}</div>
         </div>
       </div>
     </div>

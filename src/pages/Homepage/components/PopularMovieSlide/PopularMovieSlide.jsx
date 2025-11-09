@@ -47,6 +47,7 @@ const PopularMovieSlide = () => {
           <MovieCard movie={movie} key={index} />
         ))}
       </Carousel>
+      
     </div>
   );
 };
