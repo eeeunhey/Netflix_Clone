@@ -1,4 +1,5 @@
 // src/layout/AppLayout.jsx
+import { useState } from "react";
 import { Outlet, NavLink, useNavigate } from "react-router-dom";
 import {
   AppBar,
@@ -7,114 +8,103 @@ import {
   IconButton,
   InputBase,
   Button,
+  Drawer,
+  List,
+  ListItemButton,
 } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 
 export default function AppLayout() {
   const nav = useNavigate();
+  const [openMenu, setOpenMenu] = useState(false);
 
   return (
     <>
-      <AppBar
-        position="sticky"
-        elevation={0}
-        sx={{
-          bgcolor: "#000",                  
-          borderBottom: "1px solid #1a1a1a"
-        }}
-      >
-        <Toolbar sx={{ minHeight: 64, px: { xs: 2, md: 3 }, gap: 2 }}>
+      <AppBar sx={{ bgcolor: "black" }}>
+        <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+          
 
-          <Box sx={{ display: "flex", alignItems: "center", gap: 3, flex: 1 }}>
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+            <IconButton
+              onClick={() => setOpenMenu(true)}
+              sx={{ display: { xs: "block", md: "none" }, color: "white" }}
+            >
+              <MenuIcon />
+            </IconButton>
+
             <Box
               onClick={() => nav("/")}
               sx={{
                 cursor: "pointer",
-                fontWeight: 900,
-                letterSpacing: 1,
-                fontSize: 28,
-                color: "#e50914",           
-                fontFamily: `"Bebas Neue","Inter",system-ui,-apple-system`,
+                fontSize: 26,
+                fontWeight: "bold",
+                color: "red",
+                fontFamily: "Bebas Neue, sans-serif",
               }}
             >
               NETFLIX
             </Box>
-
-            <Button
-              component={NavLink}
-              to="/"
-              end
-              disableRipple
-              sx={{
-                color: "#e5e5e5",
-                textTransform: "none",
-                fontSize: 18,
-                px: 0,
-                "&.active": { color: "#fff", fontWeight: 700 },
-                "&:hover": { color: "#fff" },
-              }}
-            >
+            
+          <Box sx={{ display: { xs: "none", md: "flex" }, gap: 2}}>
+            <Button component={NavLink} to="/" sx={{ color: "white" }}>
               Home
             </Button>
-            <Button
-              component={NavLink}
-              to="/movies"
-              disableRipple
-              sx={{
-                color: "#e5e5e5",
-                textTransform: "none",
-                fontSize: 18,
-                px: 0,
-                "&.active": { color: "#fff", fontWeight: 700 },
-                "&:hover": { color: "#fff" },
-              }}
-            >
+            <Button component={NavLink} to="/movies" sx={{ color: "white" }}>
               Movies
             </Button>
           </Box>
+          </Box>
 
 
-          <Box
-            component="form"
-            onSubmit={(e) => {
-              e.preventDefault();
-              const q = new FormData(e.currentTarget).get("q")?.toString() || "";
-              if (q.trim()) nav(`/search?q=${encodeURIComponent(q)}`);
-            }}
-            sx={{ display: "flex", alignItems: "center", gap: 1 }}
-          >
-            <InputBase
-              name="q"
-              placeholder="Search"
-              sx={{
-                bgcolor: "#26282c",        
-                border: "1px solid #3a3f45", 
-                color: "#e5e5e5",
-                px: 2,
-                height: 44,
-                width: { xs: 200, sm: 320 },
-                borderRadius: 1.2,
-                "::placeholder": { color: "#a7b0ba", opacity: 1 },
+
+
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+            <Box
+              component="form"
+              onSubmit={(e) => {
+                e.preventDefault();
+                const q = e.target.q.value;
+                if (q) nav(`/search?q=${q}`);
               }}
-            />
-            <IconButton
-              type="submit"
-              sx={{
-                height: 44,
-                width: 44,
-                borderRadius: 1.2,
-                border: "1px solid rgba(229,9,20,0.55)",
-                bgcolor: "transparent",
-                "&:hover": {
-                  bgcolor: "rgba(229,9,20,0.08)",        
-                },
-              }}
+              sx={{ display: { xs: "none", md: "flex" } }}
             >
-              <SearchIcon sx={{ color: "#e50914" }} />
+              <InputBase
+                name="q"
+                placeholder="Search..."
+                sx={{
+                  bgcolor: "#333",
+                  color: "white",
+                  px: 2,
+                  borderRadius: 1,
+                }}
+              />
+              <IconButton type="submit" sx={{ color: "red" }}>
+                <SearchIcon />
+              </IconButton>
+            </Box>
+
+            <IconButton
+              onClick={() => nav("/search")}
+              sx={{ display: { xs: "block", md: "none" }, color: "white" }}
+            >
+              <SearchIcon />
             </IconButton>
           </Box>
         </Toolbar>
       </AppBar>
+
+      {/* 모바일 메뉴 */}
+      <Drawer open={openMenu} onClose={() => setOpenMenu(false)}>
+        <List sx={{ width: 200 }}>
+          <ListItemButton onClick={() => { nav("/"); setOpenMenu(false); }}>
+            Home
+          </ListItemButton>
+          <ListItemButton onClick={() => { nav("/movies"); setOpenMenu(false); }}>
+            Movies
+          </ListItemButton>
+        </List>
+      </Drawer>
 
       <Outlet />
     </>
