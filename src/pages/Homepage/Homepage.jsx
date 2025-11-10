@@ -1,6 +1,6 @@
 import React from 'react'
 import Banner from './components/Banner/Banner'
-import PopularMovieSlide from './components/PopularMovieSlide/PopularMovieSlide'
+import MovieSlide from './components/MovieSlide/MovieSlide'
 
 // 1. 배너 만들기 => popoular 영화를 들고와서 첫번쨰 아이템을 보여주자
 // 1-1 배너 컴포넌트 만들어보기
@@ -17,7 +17,7 @@ const Homepage = () => {
     <div>
 
     <Banner />
-    <PopularMovieSlide />
+    <MovieSlide />
     
 
     </div>

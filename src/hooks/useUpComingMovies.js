@@ -7,7 +7,7 @@ const fetchUpComingMovies = () => {
   return api.get(`/movie/upcoming`);
 };
 
-export const usePopularMoivesQuery = () => {
+export const useUpComingMoviesQuery = () => {
   return useQuery({
     queryKey: ["moive-upcoming"],
     queryFn: fetchUpComingMovies,

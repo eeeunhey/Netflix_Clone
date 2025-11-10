@@ -1,0 +1,141 @@
+.movie-card {
+  position: relative;
+  width: 250px;
+  height: 400px;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.25s ease;
+}
+
+/* hover 시 살짝 확대 */
+.movie-card:hover {
+  transform: scale(1.03);
+}
+
+.movie-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.85) 10%,
+    rgba(0, 0, 0, 0.3) 60%,
+    transparent 90%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 1;
+}
+.movie-card:hover::after {
+  opacity: 1;
+}
+
+.heart-btn {
+  position: absolute !important;
+  top: 10px;
+  right: 10px;
+  z-index: 3;
+  background: rgba(0, 0, 0, 0.5) !important;
+  border-radius: 10px !important;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+}
+.movie-card:hover .heart-btn {
+  opacity: 1;
+  visibility: visible;
+}
+
+.play-btn {
+  position: absolute !important;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  z-index: 3;
+  background: rgba(255, 255, 255, 0.2) !important;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+.movie-card:hover .play-btn {
+  opacity: 1;
+  visibility: visible;
+  background: rgba(255, 255, 255, 0.35);
+  transform: translate(-50%, -50%) scale(1.05);
+}
+
+.movie-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  color: white;
+  padding: 16px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(15px);
+  transition: all 0.4s ease;
+}
+.movie-card:hover .movie-info {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.meta {
+  display: flex;
+  gap: 8px;
+  font-size: 13px;
+  opacity: 0.9;
+  margin-bottom: 6px;
+}
+
+.age {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.badge {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.overview {
+  font-size: 13px;
+  opacity: 0.8;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 768px) {
+  .movie-card {
+    width: 150px;
+    height: 250px;
+  }
+  .title {
+    font-size: 12px;
+  }
+  .overview {
+    font-size: 12px;
+    line-height: 1.4;
+  }
+}

@@ -11,20 +11,21 @@ import {
   Drawer,
   List,
   ListItemButton,
+  useMediaQuery,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
+import NetflixLogo from "../compopnents/NetflixLogo";
 
 export default function AppLayout() {
   const nav = useNavigate();
   const [openMenu, setOpenMenu] = useState(false);
+  const isMobile = useMediaQuery("(max-width:600px)");
 
   return (
     <>
       <AppBar sx={{ bgcolor: "black" }}>
         <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-          
-
           <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
             <IconButton
               onClick={() => setOpenMenu(true)}
@@ -37,40 +38,30 @@ export default function AppLayout() {
               onClick={() => nav("/")}
               sx={{
                 cursor: "pointer",
-                fontSize: 26,
-                fontWeight: "bold",
                 color: "red",
                 fontFamily: "Bebas Neue, sans-serif",
               }}
             >
-              NETFLIX
+              <NetflixLogo showLabel={false} size={isMobile ? 60 : 100} />
             </Box>
-            
-          <Box sx={{ display: { xs: "none", md: "flex" }, gap: 2}}>
-            <Button component={NavLink} to="/" sx={{ color: "white" }}>
-              Home
-            </Button>
-            <Button component={NavLink} to="/movies" sx={{ color: "white" }}>
-              Movies
-            </Button>
+
+            <Box sx={{ display: { xs: "none", md: "flex" }, gap: 2 }}>
+              <Button component={NavLink} to="/" sx={{ color: "white" }}>
+                Home
+              </Button>
+              <Button component={NavLink} to="/movies" sx={{ color: "white" }}>
+                Movies
+              </Button>
+            </Box>
           </Box>
-          </Box>
-
-
-
 
           <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
             <Box
               component="form"
-              onSubmit={(e) => {
-                e.preventDefault();
-                const q = e.target.q.value;
-                if (q) nav(`/search?q=${q}`);
-              }}
               sx={{ display: { xs: "none", md: "flex" } }}
             >
               <InputBase
-                name="q"
+
                 placeholder="Search..."
                 sx={{
                   bgcolor: "#333",
@@ -94,13 +85,26 @@ export default function AppLayout() {
         </Toolbar>
       </AppBar>
 
+
+
+
       {/* 모바일 메뉴 */}
       <Drawer open={openMenu} onClose={() => setOpenMenu(false)}>
         <List sx={{ width: 200 }}>
-          <ListItemButton onClick={() => { nav("/"); setOpenMenu(false); }}>
+          <ListItemButton
+            onClick={() => {
+              nav("/");
+              setOpenMenu(false);
+            }}
+          >
             Home
           </ListItemButton>
-          <ListItemButton onClick={() => { nav("/movies"); setOpenMenu(false); }}>
+          <ListItemButton
+            onClick={() => {
+              nav("/movies");
+              setOpenMenu(false);
+            }}
+          >
             Movies
           </ListItemButton>
         </List>
