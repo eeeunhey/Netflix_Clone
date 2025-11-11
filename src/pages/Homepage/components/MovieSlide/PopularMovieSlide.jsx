@@ -14,7 +14,7 @@ const PopularMovieSlide = () => {
   return (
     <div style={{ marginBottom: "48px" }}>
       <MovieSlider
-        title="🔥 Popular Movies"
+        title="🔥 인기 상영작"
         movies={data?.results}
         responsive={responsive}
       />

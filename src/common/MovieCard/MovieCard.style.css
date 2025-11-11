@@ -9,9 +9,10 @@
   transition: transform 0.25s ease;
 }
 
-/* hover 시 살짝 확대 */
+
 .movie-card:hover {
   transform: scale(1.03);
+    z-index: 2;
 }
 
 .movie-card::after {

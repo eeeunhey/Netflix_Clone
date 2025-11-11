@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import BackgroundImage from "../../../public/auth_background.jpg";
+
 
 const AuthLayout = () => {
   return (
