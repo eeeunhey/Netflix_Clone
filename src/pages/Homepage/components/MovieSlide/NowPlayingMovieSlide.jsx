@@ -18,7 +18,11 @@ const NowPlayingMovieSlide = () => {
   return (
     <div style={{ marginBottom: "48px" }}>
       <MovieSlider
+<<<<<<< Updated upstream
         title="현재 상영작"
+=======
+        title="🎬 현재 상영 중인 영화"
+>>>>>>> Stashed changes
         movies={data.results}
         responsive={responsive}
       />

@@ -21,7 +21,7 @@ export default function AppLayout() {
   const nav = useNavigate();
   const [openMenu, setOpenMenu] = useState(false);
   const isMobile = useMediaQuery("(max-width:600px)");
-
+  const [keyword, setKeyword] = useState("");
   return (
     <>
       <AppBar sx={{ bgcolor: "black" }}>
@@ -61,8 +61,11 @@ export default function AppLayout() {
               sx={{ display: { xs: "none", md: "flex" } }}
             >
               <InputBase
-
+                onSubmit={searchBuKeyword}
                 placeholder="Search..."
+                type="search"
+                value={keyword}
+                onChange={(event) => setKeyword(event.target.value)}
                 sx={{
                   bgcolor: "#333",
                   color: "white",
@@ -76,6 +79,7 @@ export default function AppLayout() {
             </Box>
 
             <IconButton
+            type="submit"
               onClick={() => nav("/search")}
               sx={{ display: { xs: "block", md: "none" }, color: "white" }}
             >
