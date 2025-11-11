@@ -11,10 +11,10 @@ const MovieCard = ({ movie }) => {
   const { data: genreData } = useMovieGenreQuery();
   console.log("장르임", genreData);
 
-  const showGenre=(genreIdList)=>{
-    if(!genreData) return [];
-    const genreNameList= genreIdList.map((id)=>{
-      const genreObj = genreData.find((genre)=>genre.id === id)
+  const showGenre = (genreIdList) => {
+    if (!genreData) return [];
+    const genreNameList = genreIdList.map((id) => {
+      const genreObj = genreData.find((genre) => genre.id === id)
       return genreObj.name;
     });
 
@@ -32,6 +32,9 @@ const MovieCard = ({ movie }) => {
       }}
       className="movie-card"
     >
+      {movie.rank && (
+        <div className="rank-badge">{movie.rank}</div>
+      )}
       <div className="overlay">
         <IconButton className="heart-btn" aria-label="wishlist">
           <FavoriteBorder sx={{ color: "white", fontSize: 22 }} />

@@ -10,7 +10,7 @@ const UpComingMoviesSlide = () => {
   if (isLoading) return <div>Loading...</div>;
 
   if (isError) return <Alert severity="error">{error.message}</Alert>;
-
+    console.log("TT",data)
   // 정상 렌더링
   return (
     <div style={{ marginBottom: "48px" }}>
