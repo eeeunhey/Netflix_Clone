@@ -119,6 +119,13 @@
   font-size: 12px;
 }
 
+.star {
+  background: rgba(239, 243, 19, 0.377);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
 .rank-badge {
   position: absolute;
   left: 10px;

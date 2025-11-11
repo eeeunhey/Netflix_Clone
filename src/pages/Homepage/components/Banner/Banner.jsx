@@ -2,6 +2,7 @@ import { usePopularMoivesQuery } from "../../../../hooks/usePopularMovies";
 import Alert from "@mui/material/Alert";
 import "./Banner.style.css";
 import SpinnerLoader from "../../../../compopnents/SpinnerLoader";
+import { Button } from "@mui/material";
 
 const Banner = () => {
   const { data, isLoading, isError, error } = usePopularMoivesQuery();
@@ -24,6 +25,8 @@ const Banner = () => {
       <div className="text-white banner-tex-area">
         <h1>{data.results[0].title}</h1>
         <p>{data.results[0].overview}</p>
+        <Button variant="outline">Play</Button>
+        <Button variant="outline">Now</Button>
       </div>
     </div>
   );

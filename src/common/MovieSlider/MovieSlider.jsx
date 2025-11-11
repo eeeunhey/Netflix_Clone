@@ -7,7 +7,7 @@ const MovieSlider = ({title, movies, responsive}) => {
   return (
     <div>
       {/* <h3>Popular Movies</h3> */}
-      <h3>{title}</h3>
+      <h2 >{title}</h2>
       <Carousel
         infinite={true}
         centerMode={true}
