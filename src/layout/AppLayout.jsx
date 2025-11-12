@@ -22,6 +22,15 @@ export default function AppLayout() {
   const [openMenu, setOpenMenu] = useState(false);
   const isMobile = useMediaQuery("(max-width:600px)");
   const [keyword, setKeyword] = useState("");
+  const navigate = useNavigate();
+
+  const searchByKeyword = (event) => {
+    event.preventDefault();
+    //url 바꿔주기 페이지에 url값을 받아온다 리프레시 했을 때 무비에 키워드가 들어온채 셋팅
+    //들어온 키워드 값을 쿼리값으로 넣어준다
+    navigate(`/movies?q=${keyword}`);
+    setKeyword("");
+  };
   return (
     <>
       <AppBar sx={{ bgcolor: "black" }}>
@@ -58,10 +67,10 @@ export default function AppLayout() {
           <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
             <Box
               component="form"
+              onSubmit={searchByKeyword}
               sx={{ display: { xs: "none", md: "flex" } }}
             >
               <InputBase
-                onSubmit={searchBuKeyword}
                 placeholder="Search..."
                 type="search"
                 value={keyword}
@@ -79,7 +88,7 @@ export default function AppLayout() {
             </Box>
 
             <IconButton
-            type="submit"
+              type="submit"
               onClick={() => nav("/search")}
               sx={{ display: { xs: "block", md: "none" }, color: "white" }}
             >
@@ -88,9 +97,6 @@ export default function AppLayout() {
           </Box>
         </Toolbar>
       </AppBar>
-
-
-
 
       {/* 모바일 메뉴 */}
       <Drawer open={openMenu} onClose={() => setOpenMenu(false)}>
@@ -114,7 +120,10 @@ export default function AppLayout() {
         </List>
       </Drawer>
 
-      <Outlet />
+      <main style={{ paddingTop: 64 }}>
+        <Outlet />
+      </main>
+
     </>
   );
 }

@@ -10,21 +10,12 @@ const UpComingMoviesSlide = () => {
   if (isLoading) return <div>Loading...</div>;
 
   if (isError) return <Alert severity="error">{error.message}</Alert>;
-<<<<<<< Updated upstream
     console.log("TT",data)
   // 정상 렌더링
   return (
     <div style={{ marginBottom: "48px" }}>
       <MovieSlider
         title="개봉 예정작 "
-=======
-
-
-  return (
-    <div style={{ marginBottom: "48px" }}>
-      <MovieSlider
-        title="🎥 개봉 예정작"
->>>>>>> Stashed changes
         movies={data?.results}
         responsive={responsive}
       />

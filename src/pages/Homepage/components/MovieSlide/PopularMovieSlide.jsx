@@ -14,11 +14,7 @@ const PopularMovieSlide = () => {
   return (
     <div style={{ marginBottom: "48px" }}>
       <MovieSlider
-<<<<<<< Updated upstream
         title="인기 상영작"
-=======
-        title="🔥 인기 상영작"
->>>>>>> Stashed changes
         movies={data?.results}
         responsive={responsive}
       />
