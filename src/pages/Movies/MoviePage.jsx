@@ -52,11 +52,6 @@ const MoviePage = () => {
   return (
     <div >
       <Container sx={{ py: 10 }}>
-        {!keyword && (
-          <Box textAlign="center" sx={{ mt: 5, color: "white" }}>
-            검색어를 입력해주세요
-          </Box>
-        )}
         {keyword && list.length === 0 && (
           <Box textAlign="center" sx={{ mt: 5, color: "white" }}>
             "{keyword}에 대한 결과가 없습니다"
