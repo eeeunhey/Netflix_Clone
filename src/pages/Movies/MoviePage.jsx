@@ -11,7 +11,7 @@ const MoviePage = () => {
   const keyword = query.get("q");
   const { data, isLoading, isError, error } = useSearchMovieQuery({ keyword });
 
-  const itemsPerPage = 8;
+  const itemsPerPage = 8; // 한 페이지에 보여줄 카드 수
   const [currentPage, setCurrentPage] = useState(0);
 
   const list = useMemo(
@@ -34,89 +34,113 @@ const MoviePage = () => {
     }
   }, [keyword]);
 
-  if (isLoading) return <SpinnerLoader />;
+  if (isLoading)
+    return (
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "80vh",
+        }}
+      >
+        <SpinnerLoader />
+      </Box>
+    );
   if (isError) return <Alert severity="error">{error.message}</Alert>;
 
   return (
-    <div style={{ paddingTop: 64 }}>
-      <Container sx={{ py: 3 }}>
-        <Grid container spacing={2}>
-          <Grid size={{ xs: 12 }}>
-            <Box></Box>
-          </Grid>
+    <div >
+      <Container sx={{ py: 10 }}>
+        {!keyword && (
+          <Box textAlign="center" sx={{ mt: 5, color: "white" }}>
+            검색어를 입력해주세요
+          </Box>
+        )}
+        {keyword && list.length === 0 && (
+          <Box textAlign="center" sx={{ mt: 5, color: "white" }}>
+            "{keyword}에 대한 결과가 없습니다"
+          </Box>
+        )}
 
-          <Grid size={{ xs: 12, lg: 4 }}>
-            <Box>
-              <InputBase placeholder="입력" />
-            </Box>
-          </Grid>
+        {list.length > 0 && (
+          <Grid container spacing={4}>
+            {/* <Grid size={{ xs: 12 }}>
+              <Box></Box>
+            </Grid> */}
 
-          <Grid size={{ xs: 12, lg: 8 }}>
-            <Box
-              sx={{
-                display: "grid",
-                gridTemplateColumns: {
-                  xs: "repeat(2, 1fr)",
-                  sm: "repeat(3, 1fr)",
-                  md: "repeat(4, 1fr)",
-                },
-                gap: 2,
-                justifyItems: "center",
-                mb: 3,
-              }}
-            >
-              {currentItems.map((movie) => (
-                <Box key={movie.id} sx={{ width: "100%", maxWidth: 220 }}>
-                  <MovieCard movie={movie} />
-                </Box>
-              ))}
-            </Box>
+            <Grid size={{ xs: 12, lg: 4 }}>
+              <Box>
+                <InputBase placeholder="입력" />
+              </Box>
+            </Grid>
 
-            {/* ✅ 페이지네이션 */}
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                "& .pagination": {
+            <Grid size={{ xs: 12, lg: 8 }}>
+              <Box
+                sx={{
+                  display: "grid",
+                  gridTemplateColumns: {
+                    xs: "repeat(2, 1fr)",
+                    sm: "repeat(3, 1fr)",
+                    md: "repeat(4, 1fr)",
+                  },
+                  gap: 5,
+                  justifyItems: "center",
+                  mb: 3,
+                }}
+              >
+                {currentItems.map((movie) => (
+                  <Box key={movie.id} sx={{ width: "100%", maxWidth: 220 }}>
+                    <MovieCard movie={movie} />
+                  </Box>
+                ))}
+              </Box>
+
+              {/* ✅ 페이지네이션 */}
+              <Box
+                sx={{
                   display: "flex",
-                  gap: 1,
-                  listStyle: "none",
-                  p: 0,
-                  m: 0,
-                },
-                "& .pagination li a": {
-                  display: "inline-block",
-                  padding: "6px 10px",
-                  borderRadius: "8px",
-                  border: "1px solid #444",
-                  cursor: "pointer",
-                  userSelect: "none",
-                },
-                "& .pagination li.selected a": {
-                  background: "#1976d2",
-                  color: "#fff",
-                  borderColor: "#1976d2",
-                },
-                "& .pagination li.disabled a": {
-                  opacity: 0.5,
-                  cursor: "default",
-                },
-              }}
-            >
-              <ReactPaginate
-                className="pagination"
-                breakLabel="..."
-                nextLabel="next ›"
-                previousLabel="‹ prev"
-                onPageChange={handlePageClick}
-                pageRangeDisplayed={5}
-                pageCount={pageCount}
-                forcePage={Math.min(currentPage, pageCount - 1)}
-                renderOnZeroPageCount={null}
-              />
-            </Box>
+                  justifyContent: "center",
+                  "& .pagination": {
+                    display: "flex",
+                    gap: 1,
+                    listStyle: "none",
+                    p: 0,
+                    m: 0,
+                  },
+                  "& .pagination li a": {
+                    display: "inline-block",
+                    padding: "6px 10px",
+                    borderRadius: "8px",
+                    border: "1px solid #444",
+                    cursor: "pointer",
+                    userSelect: "none",
+                  },
+                  "& .pagination li.selected a": {
+                    background: "#d21919ff",
+                    color: "#fff",
+                  },
+                  "& .pagination li.disabled a": {
+                    opacity: 0.5,
+                    cursor: "default",
+                  },
+                }}
+              >
+                <ReactPaginate
+                  className="pagination"
+                  breakLabel="..."
+                  nextLabel="next ›"
+                  previousLabel="‹ prev"
+                  onPageChange={handlePageClick}
+                  pageRangeDisplayed={5}
+                  pageCount={pageCount}
+                  forcePage={Math.min(currentPage, pageCount - 1)}
+                  renderOnZeroPageCount={null}
+                />
+              </Box>
+            </Grid>
           </Grid>
-        </Grid>
+        )}
       </Container>
     </div>
   );
