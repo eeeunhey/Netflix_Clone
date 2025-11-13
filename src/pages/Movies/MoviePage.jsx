@@ -9,22 +9,19 @@ import ReactPaginate from "react-paginate";
 const MoviePage = () => {
   const [query] = useSearchParams();
   const keyword = query.get("q");
-  const { data, isLoading, isError, error } = useSearchMovieQuery({ keyword });
-
-  const itemsPerPage = 8; // 한 페이지에 보여줄 카드 수
   const [currentPage, setCurrentPage] = useState(0);
+  const { data, isLoading, isError, error } = useSearchMovieQuery({
+    keyword,
+    page: currentPage + 1,
+  });
 
-  const list = useMemo(
-    () => (data?.results ?? []).filter((m) => !!m.poster_path),
-    [data]
-  );
-  const pageCount = Math.max(1, Math.ceil(list.length / itemsPerPage));
-  const start = currentPage * itemsPerPage;
-  const currentItems = list.slice(start, start + itemsPerPage);
+  const itemsPerPage = 8;
+
+  const list = data?.results ?? [];
+  const totalPages = data?.total_pages ?? 1;
 
   const handlePageClick = (e) => {
     setCurrentPage(e.selected);
-
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
@@ -50,27 +47,35 @@ const MoviePage = () => {
   if (isError) return <Alert severity="error">{error.message}</Alert>;
 
   return (
-    <div >
+    <Box sx={{ overflowX: "hidden" }}>
       <Container sx={{ py: 10 }}>
         {keyword && list.length === 0 && (
           <Box textAlign="center" sx={{ mt: 5, color: "white" }}>
-            "{keyword}에 대한 결과가 없습니다"
+            "{keyword}" 에 대한 결과가 없습니다.
           </Box>
         )}
 
         {list.length > 0 && (
-          <Grid container spacing={4}>
-            {/* <Grid size={{ xs: 12 }}>
-              <Box></Box>
-            </Grid> */}
-
-            <Grid size={{ xs: 12, lg: 4 }}>
+          <Grid container spacing={2}>
+            {/* 왼쪽 검색 영역 */}
+            <Grid  xs={12} lg={4}>
               <Box>
-                <InputBase placeholder="입력" />
+                {/* <InputBase
+                  placeholder="입력"
+                  sx={{
+                    bgcolor: "#333",
+                    px: 2,
+                    py: 1,
+                    borderRadius: 1,
+                    color: "white",
+                    width: "100%",
+                  }}
+                /> */}
               </Box>
             </Grid>
 
-            <Grid size={{ xs: 12, lg: 8 }}>
+            {/* 오른쪽 영화 카드 영역 */}
+            <Grid  xs={12} lg={8}>
               <Box
                 sx={{
                   display: "grid",
@@ -79,19 +84,27 @@ const MoviePage = () => {
                     sm: "repeat(3, 1fr)",
                     md: "repeat(4, 1fr)",
                   },
-                  gap: 5,
+                  gap: 4,
                   justifyItems: "center",
                   mb: 3,
+                  overflowX: "hidden",
                 }}
               >
-                {currentItems.map((movie) => (
-                  <Box key={movie.id} sx={{ width: "100%", maxWidth: 220 }}>
+                {list.map((movie) => (
+                  <Box
+                    key={movie.id}
+                    sx={{
+                      width: "100%",
+                      display: "flex",
+                      justifyContent: "center",
+                    }}
+                  >
                     <MovieCard movie={movie} />
                   </Box>
                 ))}
               </Box>
 
-              {/* ✅ 페이지네이션 */}
+              {/* 페이지네이션 */}
               <Box
                 sx={{
                   display: "flex",
@@ -128,8 +141,8 @@ const MoviePage = () => {
                   previousLabel="‹ prev"
                   onPageChange={handlePageClick}
                   pageRangeDisplayed={5}
-                  pageCount={pageCount}
-                  forcePage={Math.min(currentPage, pageCount - 1)}
+                  pageCount={keyword ? totalPages : 1}
+                  forcePage={currentPage}
                   renderOnZeroPageCount={null}
                 />
               </Box>
@@ -137,7 +150,7 @@ const MoviePage = () => {
           </Grid>
         )}
       </Container>
-    </div>
+    </Box>
   );
 };
 

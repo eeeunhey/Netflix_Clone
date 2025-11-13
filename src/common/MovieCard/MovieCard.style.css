@@ -1,7 +1,7 @@
 .movie-card {
   position: relative;
-  width: 250px;
-  height: 400px;
+  width: 200px;
+  height: 350px;
   background-size: cover;
   background-position: center;
   overflow: hidden;
@@ -9,10 +9,12 @@
   transition: transform 0.25s ease;
 }
 
+.movie-card img {
+  transition: transform 0.5s;
+}
 
-.movie-card:hover {
-  transform: scale(1.03);
-  z-index: 2;
+.movie-card:hover img {
+  transform: scale(1.05);
 }
 
 .movie-card::after {

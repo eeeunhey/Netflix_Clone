@@ -7,7 +7,7 @@ const fetchNowPlayingMovies = () => {
 
 export const useNowPlayingMoviesQuery = () => {
   return useQuery({
-    queryKey: ["moive-nowPlaying"],
+    queryKey: ["moive-nowplaying"],
     queryFn: fetchNowPlayingMovies,
     select: (result) => result.data,
   });

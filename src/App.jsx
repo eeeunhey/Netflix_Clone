@@ -21,7 +21,7 @@ function App() {
           {/* /movies, /movies/:id, /movies/:id/recommendation, /movies/:id/reviews */}
           <Route path="movies">
             <Route index element={<MoviePage />} />
-            {/* <Route path=":id" element={<MovieDetailPage />} /> */}
+            <Route path=":id" element={<MovieDetailPage />} />
             <Route path=":id/recommendation" element={<div>추천 영화</div>} />
             <Route path=":id/reviews" element={<div>리뷰 목록</div>} />
           </Route>

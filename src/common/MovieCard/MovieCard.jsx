@@ -2,11 +2,18 @@ import { Badge, IconButton } from "@mui/material";
 import { FavoriteBorder, PlayArrow } from "@mui/icons-material";
 import "./MovieCard.style.css";
 import { useMovieGenreQuery } from "../../hooks/useMovieGenre";
+import { useNavigate } from "react-router-dom";
 
-// 백그라운드 사진
 const MovieCard = ({ movie }) => {
+  const nav = useNavigate();
+  
+  const goToDetail = () => {
+    nav(`/movies/${movie.id}`);
+  }
+
   const year = movie?.release_date?.slice(0, 4) ?? "—";
   const age = movie?.adult ? "18+" : "ALL";
+
 
   const { data: genreData } = useMovieGenreQuery();
   console.log("장르임", genreData);
@@ -14,27 +21,25 @@ const MovieCard = ({ movie }) => {
   const showGenre = (genreIdList) => {
     if (!genreData) return [];
     const genreNameList = genreIdList.map((id) => {
-      const genreObj = genreData.find((genre) => genre.id === id)
+      const genreObj = genreData.find((genre) => genre.id === id);
       return genreObj.name;
     });
 
-    return genreNameList
-
-  }
+    return genreNameList;
+  };
 
   return (
     <div
-      style={{
-        backgroundImage:
-          "url(" +
-          `https://media.themoviedb.org/t/p/w300_and_h450_bestv2${movie.poster_path}` +
-          ")",
-      }}
       className="movie-card"
+      onClick={goToDetail}
+      style={{
+        backgroundImage: movie.poster_path
+          ? `url(https://media.themoviedb.org/t/p/w300_and_h450_bestv2${movie.poster_path})`
+          : "none",
+        backgroundColor: movie.poster_path ? "transparent" : "#444",
+      }}
     >
-      {movie.rank && (
-        <div className="rank-badge">{movie.rank}</div>
-      )}
+      {movie.rank && <div className="rank-badge">{movie.rank}</div>}
       <div className="overlay">
         <IconButton className="heart-btn" aria-label="wishlist">
           <FavoriteBorder sx={{ color: "white", fontSize: 22 }} />
@@ -54,7 +59,9 @@ const MovieCard = ({ movie }) => {
           </div>
           <div className="meta">
             {showGenre(movie.genre_ids).map((genre, index) => (
-              <Badge className="badge" key={index}>{genre}</Badge>
+              <Badge className="badge" key={index}>
+                {genre}
+              </Badge>
             ))}
           </div>
 
