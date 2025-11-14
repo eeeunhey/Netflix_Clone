@@ -141,7 +141,7 @@ const MoviePage = () => {
                   previousLabel="‹ prev"
                   onPageChange={handlePageClick}
                   pageRangeDisplayed={5}
-                  pageCount={keyword ? totalPages : 1}
+                  pageCount={ totalPages }
                   forcePage={currentPage}
                   renderOnZeroPageCount={null}
                 />

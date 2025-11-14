@@ -7,7 +7,6 @@ import MoviePage from "./pages/Movies/MoviePage";
 import MovieDetailPage from "./pages/MoviesDetail/MovieDetailPage";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 
-import AuthLayout from "./pages/Auth/AuthLayout";
 
 
 function App() {
@@ -16,14 +15,14 @@ function App() {
       <Routes>
         <Route path="/" element={<AppLayout />}>
           <Route index element={<Homepage />} />
-          <Route path="/auth" element={<AuthLayout/>} />
+          {/* <Route path="/auth" element={<AuthLayout/>} /> */}
 
           {/* /movies, /movies/:id, /movies/:id/recommendation, /movies/:id/reviews */}
           <Route path="movies">
             <Route index element={<MoviePage />} />
             <Route path=":id" element={<MovieDetailPage />} />
-            <Route path=":id/recommendation" element={<div>추천 영화</div>} />
-            <Route path=":id/reviews" element={<div>리뷰 목록</div>} />
+            {/* <Route path=":id/recommendation" element={<div>추천 영화</div>} />
+            <Route path=":id/reviews" element={<div>리뷰 목록</div>} /> */}
           </Route>
         </Route>
 
