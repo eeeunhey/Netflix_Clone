@@ -12,6 +12,7 @@ import {
   List,
   ListItemButton,
   useMediaQuery,
+  Avatar,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
@@ -94,9 +95,12 @@ export default function AppLayout() {
             >
               <SearchIcon />
             </IconButton>
+                  <Avatar src="/broken-image.jpg" />
           </Box>
         </Toolbar>
+        
       </AppBar>
+
 
       {/* 모바일 메뉴 */}
       <Drawer open={openMenu} onClose={() => setOpenMenu(false)}>

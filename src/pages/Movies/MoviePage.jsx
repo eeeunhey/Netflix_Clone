@@ -15,7 +15,7 @@ const MoviePage = () => {
     page: currentPage + 1,
   });
 
-  const itemsPerPage = 8;
+
 
   const list = data?.results ?? [];
   const totalPages = data?.total_pages ?? 1;
