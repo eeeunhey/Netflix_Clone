@@ -19,9 +19,9 @@ const MovieDetailPage = () => {
   return (
     <div style={{ paddingTop: "80px" }}
     >
-      <p>{data.id}</p>
-      <p>{data.title}</p>
-      <p>{data. overview}</p>
+      <p>{data?.id}</p>
+      <p>{data?.title}</p>
+      <p>{data?. overview}</p>
     </div>
   )
 }
