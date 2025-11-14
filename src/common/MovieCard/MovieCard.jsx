@@ -16,7 +16,7 @@ const MovieCard = ({ movie }) => {
 
 
   const { data: genreData } = useMovieGenreQuery();
-  console.log("장르임", genreData);
+  // console.log("장르임", genreData);
 
   const showGenre = (genreIdList) => {
     if (!genreData) return [];
