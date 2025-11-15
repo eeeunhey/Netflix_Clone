@@ -1,0 +1,11 @@
+.recommend-container {
+  width: 90%;
+  margin: auto;
+}
+
+.recommend-container .num {
+  display: none;
+}
+.recommend-container .top-banner {
+  display: none;
+}

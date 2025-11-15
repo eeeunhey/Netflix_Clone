@@ -59,19 +59,7 @@ const MoviePage = () => {
           <Grid container spacing={2}>
             {/* 왼쪽 검색 영역 */}
             <Grid  xs={12} lg={4}>
-              <Box>
-                {/* <InputBase
-                  placeholder="입력"
-                  sx={{
-                    bgcolor: "#333",
-                    px: 2,
-                    py: 1,
-                    borderRadius: 1,
-                    color: "white",
-                    width: "100%",
-                  }}
-                /> */}
-              </Box>
+
             </Grid>
 
             {/* 오른쪽 영화 카드 영역 */}

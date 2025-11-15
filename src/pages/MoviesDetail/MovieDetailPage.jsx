@@ -1,189 +1,206 @@
+// src/pages/MovieDetail/MovieDetailPage.jsx
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import {
+  Modal,
   Box,
-  Typography,
-  Chip,
+  CircularProgress,
+  Alert,
   Button,
-  Dialog,
-  DialogContent,
-  IconButton,
-  Grid,
-  Container,
+  Chip,
 } from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
+import { Star } from "lucide-react";
 import { useMovieDetail } from "../../hooks/useMovieDetail";
+
+import "./MovieDatailPage.style.css";
+import MoviePreview from "./MoviePreview/MoviePreview";
+import MovieCredits from "./MovieCredits/MovieCredits";
 
 const BACKDROP_BASE = "https://image.tmdb.org/t/p/original";
 const POSTER_BASE = "https://image.tmdb.org/t/p/w500";
 
-const MovieDetailPage = ({ isModal = false }) => {
+// MUI Modal
+const modalStyle = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: "90%",
+  maxWidth: 1100,
+  maxHeight: "90vh",
+  bgcolor: "transparent",
+  boxShadow: 24,
+  borderRadius: 4,
+  overflowY: "auto",
+  p: 0,
+};
+
+const MovieDetailContent = ({ movie }) => {
+  const backdropUrl = BACKDROP_BASE + (movie.backdrop_path || "");
+  const posterUrl = POSTER_BASE + (movie.poster_path || "");
+  const year = (movie.release_date || "").slice(0, 4);
+  const rating = (movie.vote_average || 0).toFixed(1);
+  const runtime = (movie.runtime || "N/A") + " min";
+  const trailerUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(
+    movie.title + " trailer"
+  )}`;
+
+  return (
+    <div className="detail-page">
+      <div className="detail-backdrop-header">
+        {backdropUrl ? (
+          <img
+            src={backdropUrl}
+            alt={movie.title}
+            className="detail-backdrop-image"
+          />
+        ) : (
+          <div className="detail-backdrop-fallback" />
+        )}
+        <div className="detail-backdrop-overlay" />
+      </div>
+
+      <div className="detail-main">
+        <div className="detail-poster-area">
+          <div className="detail-poster-frame">
+            {posterUrl ? (
+              <img
+                src={posterUrl}
+                alt={movie.title}
+                className="detail-poster-image"
+              />
+            ) : (
+              <div className="detail-poster-empty">
+                <span className="detail-poster-empty-text">
+                  No poster available
+                </span>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* 정보 영역 */}
+        <div className="detail-info-area">
+          {/* 제목 + 연도 */}
+          <h2 className="detail-title">
+            {movie.title}{" "}
+            {year && <span className="detail-year">({year})</span>}
+          </h2>
+
+          {/* 태그라인 */}
+          {movie.tagline && <p className="detail-tagline">{movie.tagline}</p>}
+
+          {/* 평점 / 러닝타임 / 개봉일 */}
+          <div className="detail-meta">
+            <span className="detail-meta-item detail-meta-rating">
+              <Star className="detail-meta-rating-icon" size={18} />
+              {rating}
+            </span>
+            <span className="detail-meta-dot">•</span>
+            <span className="detail-meta-item">{runtime}</span>
+            <span className="detail-meta-dot">•</span>
+            <span className="detail-meta-item">
+              {movie.release_date || "N/A"}
+            </span>
+          </div>
+
+          <div className="detail-genres">
+            {movie.genres?.map((g) => (
+              <Chip
+                key={g.id}
+                label={g.name}
+                size="small"
+                className="detail-genre-chip"
+              />
+            ))}
+          </div>
+
+          <h3 className="detail-section-title">Overview</h3>
+          <p className="detail-overview">{movie.overview}</p>
+
+          <div className="detail-buttons">
+            <Button
+              variant="contained"
+              className="detail-btn-primary"
+              href={trailerUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Watch Now
+            </Button>
+            <Button variant="outlined" className="detail-btn-secondary">
+              + Add to Watchlist
+            </Button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const MovieDetailPage = () => {
   const { id } = useParams();
-  const nav = useNavigate();
+  const navigate = useNavigate();
   const { data: movie, isLoading, isError, error } = useMovieDetail(id);
 
-  if (isLoading) return <div style={{ color: "white", padding: 80 }}>Loading…</div>;
-  if (isError || !movie)
-    return <div style={{ color: "white", padding: 80 }}>Error… {error?.message}</div>;
+  const handleClose = () => {
+    navigate(-1);
+  };
 
-  const backdropUrl = movie.backdrop_path && `${BACKDROP_BASE}${movie.backdrop_path}`;
-  const posterUrl = movie.poster_path && `${POSTER_BASE}${movie.poster_path}`;
-  const year = movie.release_date?.slice(0, 4);
-  const trailerUrl = "https://www.youtube.com/results?search_query=" + encodeURIComponent(movie.title + " trailer");
-
-  const content = (
-    <Box sx={{ minHeight: "100vh", position: "relative", color: "white" }}>
-      {/* Background Image */}
-      {backdropUrl && (
-        <Box
-          sx={{
-            position: "absolute",
-            inset: 0,
-            backgroundImage: `url(${backdropUrl})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            filter: "brightness(0.45)",
-            zIndex: -2,
-          }}
-        />
-      )}
-
-      {/* Background Overlay */}
-      <Box
-        sx={{
-          position: "absolute",
-          inset: 0,
-          background: "linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.9))",
-          zIndex: -1,
-        }}
-      />
-
-      <Container maxWidth="lg" sx={{ py: 10 }}>
-        {/* Content Card */}
-        <Box
-          sx={{
-            backdropFilter: "blur(10px)",
-            backgroundColor: "rgba(0,0,0,0.45)",
-            borderRadius: 4,
-            boxShadow: "0 0 40px rgba(0,0,0,0.5)",
-            p: 4,
-          }}
-        >
-          <Grid container spacing={4}>
-            {/* Movie Poster */}
-            <Grid item xs={12} md={4}>
-              {posterUrl && (
-                <Box
-                  component="img"
-                  src={posterUrl}
-                  alt={movie.title}
-                  sx={{ width: "100%", borderRadius: 3, boxShadow: 4 }}
-                />
-              )}
-            </Grid>
-
-            {/* Movie Details */}
-            <Grid item xs={12} md={8}>
-              <Typography variant="h4" sx={{ fontWeight: "bold" }}>
-                {movie.title}{" "}
-                {year && (
-                  <Typography
-                    component="span"
-                    variant="h5"
-                    sx={{ color: "grey.400", fontWeight: "normal" }}
-                  >
-                    ({year})
-                  </Typography>
-                )}
-              </Typography>
-
-              {movie.tagline && (
-                <Typography sx={{ mt: 1, fontStyle: "italic", color: "grey.300" }}>
-                  {movie.tagline}
-                </Typography>
-              )}
-
-              {/* Genres */}
-              <Box sx={{ mt: 2, display: "flex", gap: 1, flexWrap: "wrap" }}>
-                {movie.genres?.map((g) => (
-                  <Chip
-                    key={g.id}
-                    label={g.name}
-                    variant="outlined"
-                    sx={{ color: "white", borderColor: "rgba(255,255,255,0.3)" }}
-                  />
-                ))}
-              </Box>
-
-              {/* Overview */}
-              <Typography sx={{ mt: 2, lineHeight: 1.6 }}>{movie.overview}</Typography>
-
-              {/* Stats */}
-              <Box sx={{ mt: 3, display: "flex", gap: 3, flexWrap: "wrap" }}>
-                <Typography variant="body2">
-                  ⭐ Rating: {movie.vote_average?.toFixed(1) ?? "N/A"}
-                </Typography>
-                <Typography variant="body2">
-                  ⏱ Runtime: {movie.runtime ? `${movie.runtime} mins` : "N/A"}
-                </Typography>
-                <Typography variant="body2">
-                  📅 Release Date: {movie.release_date}
-                </Typography>
-              </Box>
-
-              {/* Trailer Button */}
-              <Box sx={{ mt: 4, display: "flex", gap: 2 }}>
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  href={trailerUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  sx={{ px: 4, py: 1.5, borderRadius: 999 }}
-                >
-                  WATCH TRAILER
-                </Button>
-
-                {/* Modal Close Button */}
-                {isModal && (
-                  <Button
-                    variant="outlined"
-                    onClick={() => nav(-1)}
-                    sx={{ px: 4, py: 1.5, borderRadius: 999, color: "grey.300" }}
-                  >
-                    Close
-                  </Button>
-                )}
-              </Box>
-            </Grid>
-          </Grid>
-        </Box>
-      </Container>
-    </Box>
-  );
-
-  if (isModal) {
+  if (isLoading) {
     return (
-      <Dialog
-        open
-        onClose={() => nav(-1)}
-        maxWidth="lg"
-        fullWidth
-        PaperProps={{ sx: { bgcolor: "transparent", boxShadow: "none" } }}
-      >
-        <IconButton
-          onClick={() => nav(-1)}
-          sx={{ position: "absolute", right: 20, top: 20, color: "white", zIndex: 10 }}
-        >
-          <CloseIcon />
-        </IconButton>
-
-        <DialogContent sx={{ p: 0 }}>{content}</DialogContent>
-      </Dialog>
+      <Modal open onClose={handleClose}>
+        <Box sx={modalStyle} className="detail-modal-box">
+          <div className="detail-loading">
+            <CircularProgress size={80} />
+          </div>
+        </Box>
+      </Modal>
     );
   }
 
-  return content;
+  if (isError || !movie) {
+    return (
+      <Modal open onClose={handleClose}>
+        <Box sx={modalStyle} className="detail-modal-box">
+          <div className="detail-error">
+            <Alert severity="error">{error?.message}</Alert>
+          </div>
+        </Box>
+      </Modal>
+    );
+  }
+
+  return (
+    <Modal open onClose={handleClose}>
+      <Box sx={modalStyle} className="detail-modal-box">
+        <Button
+          onClick={handleClose}
+          className="detail-close-btn"
+          sx={{
+            position: "absolute",
+            top: 12,
+            right: 16,
+            minWidth: 0,
+            width: 36,
+            height: 36,
+            borderRadius: "50%",
+            backgroundColor: "rgba(255,255,255,0.1)",
+            color: "#fff",
+            zIndex: 2,
+            "&:hover": { backgroundColor: "rgba(255,255,255,0.2)" },
+          }}
+        >
+          ✕
+        </Button>
+
+        <MovieDetailContent movie={movie} />
+          <MovieCredits id={id} />
+          <MoviePreview id={id} />
+
+      </Box>
+    </Modal>
+  );
 };
 
 export default MovieDetailPage;

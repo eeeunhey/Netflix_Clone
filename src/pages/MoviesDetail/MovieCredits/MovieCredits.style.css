@@ -1,0 +1,129 @@
+/* Cast & Crew 섹션 전체 */
+.detail-credits-section {
+  margin-top: 32px;
+}
+
+/* 캐스트 + 크루 2열 레이아웃 */
+.detail-credits-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+@media (min-width: 768px) {
+  .detail-credits-layout {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
+
+.detail-credits-column {
+  flex: 1;
+}
+
+/* 섹션 안 소제목 */
+.detail-credits-subtitle {
+  margin: 0 0 12px;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* 캐스트 리스트 (가로 스크롤) */
+.detail-cast-list {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+.detail-cast-item {
+  width: 100px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.detail-cast-photo-wrapper {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #111827;
+}
+
+.detail-cast-photo {
+  width: 100%;
+  display: block;
+}
+
+.detail-cast-photo-placeholder {
+  width: 100%;
+  padding-top: 140%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #1f2937;
+}
+
+.detail-cast-initial {
+  font-size: 1.5rem;
+  color: #9ca3af;
+}
+
+.detail-cast-name {
+  margin-top: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.detail-cast-role {
+  font-size: 0.8rem;
+  color: #9ca3af;
+}
+
+/* 크루 리스트 */
+.detail-crew-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-radius: 8px;
+  background-color: #020617;
+  border: 1px solid #1f2937;
+}
+
+.detail-crew-item {
+  padding: 8px 12px;
+  border-bottom: 1px solid #111827;
+}
+
+.detail-crew-item:last-child {
+  border-bottom: none;
+}
+
+.detail-crew-main {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.detail-crew-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.detail-crew-job {
+  font-size: 0.8rem;
+  color: #9ca3af;
+}
+
+.detail-crew-dept {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+/* 로딩 섹션 */
+.detail-credits-loading {
+  margin-top: 12px;
+  display: flex;
+  justify-content: center;
+}

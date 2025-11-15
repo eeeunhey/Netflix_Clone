@@ -1,0 +1,35 @@
+
+.detail-trailer-section {
+  margin-top: 32px;
+}
+
+.detail-trailer-player {
+  margin-top: 12px;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #020617;
+}
+
+
+.detail-trailer-player iframe {
+  width: 100%;
+  height: 360px;
+}
+
+@media (min-width: 1024px) {
+  .detail-trailer-player iframe {
+    height: 420px;
+  }
+}
+
+.detail-trailer-empty {
+  margin-top: 12px;
+  color: #9ca3af;
+  font-size: 0.95rem;
+}
+
+.detail-trailer-loading {
+  margin-top: 12px;
+  display: flex;
+  justify-content: center;
+}
