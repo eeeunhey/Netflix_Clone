@@ -3,14 +3,14 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import MovieCard from "../MovieCard/MovieCard";
 
-const MovieSlider = ({title, movies, responsive}) => {
+const MovieSlider = ({ title, movies, responsive }) => {
   return (
     <div>
-      {/* <h3>Popular Movies</h3> */}
-      <h2 >{title}</h2>
+
+      <h2>{title}</h2>
       <Carousel
         infinite={true}
-        centerMode={true}
+        centerMode={false}
         itemClass="movie-slider p-1"
         containerClass="carousel-container"
         responsive={responsive}

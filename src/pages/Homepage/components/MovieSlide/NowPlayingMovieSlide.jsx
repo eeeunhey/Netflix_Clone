@@ -18,7 +18,7 @@ const NowPlayingMovieSlide = () => {
   return (
     <div style={{ marginBottom: "48px" }}>
       <MovieSlider
-        title="현재 상영작"
+        title="Now Playing"
         movies={data.results}
         responsive={responsive}
       />

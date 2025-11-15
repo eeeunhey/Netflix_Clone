@@ -20,7 +20,7 @@ const TrendingWeekSlide = () => {
     return (
         <div>
             <MovieSlider
-                title="오늘의 TOP 20"
+                title=" TOP 20"
                 movies={rankedMovies}
                 responsive={responsive}
             />

@@ -15,6 +15,10 @@ import { useMovieDetail } from "../../hooks/useMovieDetail";
 import "./MovieDatailPage.style.css";
 import MoviePreview from "./MoviePreview/MoviePreview";
 import MovieCredits from "./MovieCredits/MovieCredits";
+import MovieRecommend from "./MovieRecommend/MovieRecommend";
+import MovieReview from "./MovieReview/MovieReview";
+
+
 
 const BACKDROP_BASE = "https://image.tmdb.org/t/p/original";
 const POSTER_BASE = "https://image.tmdb.org/t/p/w500";
@@ -41,9 +45,7 @@ const MovieDetailContent = ({ movie }) => {
   const year = (movie.release_date || "").slice(0, 4);
   const rating = (movie.vote_average || 0).toFixed(1);
   const runtime = (movie.runtime || "N/A") + " min";
-  const trailerUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(
-    movie.title + " trailer"
-  )}`;
+  const tmdbUrl = `https://www.themoviedb.org/movie/${movie.id}`;
 
   return (
     <div className="detail-page">
@@ -120,9 +122,9 @@ const MovieDetailContent = ({ movie }) => {
 
           <div className="detail-buttons">
             <Button
-              variant="contained"
-              className="detail-btn-primary"
-              href={trailerUrl}
+              variant="outlined"
+              className="detail-btn-secondary"
+              href={tmdbUrl}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -142,6 +144,7 @@ const MovieDetailPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { data: movie, isLoading, isError, error } = useMovieDetail(id);
+
 
   const handleClose = () => {
     navigate(-1);
@@ -195,9 +198,10 @@ const MovieDetailPage = () => {
         </Button>
 
         <MovieDetailContent movie={movie} />
-          <MovieCredits id={id} />
-          <MoviePreview id={id} />
-
+        <MovieCredits id={id} />
+        <MoviePreview id={id} />
+        <MovieRecommend id={id} />
+        <MovieReview id={id} />
       </Box>
     </Modal>
   );

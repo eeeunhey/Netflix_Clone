@@ -1,14 +1,13 @@
 .movie-card {
   position: relative;
-  width: 200px;
-  height: 350px;
+  width: 90%;         
+  aspect-ratio: 2 / 3; 
   background-size: cover;
   background-position: center;
   overflow: hidden;
   cursor: pointer;
   transition: transform 0.25s ease;
 }
-
 .movie-card img {
   transition: transform 0.5s;
 }

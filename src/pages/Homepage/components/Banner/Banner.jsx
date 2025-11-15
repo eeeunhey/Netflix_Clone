@@ -1,7 +1,7 @@
 import { usePopularMoivesQuery } from "../../../../hooks/usePopularMovies";
 import Alert from "@mui/material/Alert";
 import "./Banner.style.css";
-import SpinnerLoader from "../../../../compopnents/SpinnerLoader";
+
 import { Button } from "@mui/material";
 
 const Banner = () => {
@@ -9,7 +9,7 @@ const Banner = () => {
 
   console.log("data", data);
   if (isLoading) {
-    return <h1>Loading.....<SpinnerLoader /></h1>;
+    return <h1>Loading.....</h1>;
   }
 
   if (isError) {

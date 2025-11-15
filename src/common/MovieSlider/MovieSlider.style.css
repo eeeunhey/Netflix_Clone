@@ -1,32 +1,5 @@
 .carousel-container {
-  position: relative;
-  overflow: visible;
-  height: auto;
   overflow: hidden;
+  height: auto;
   padding: 4px 16px 44px;
-}
-
-.carousel-container h3 {
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: #fff;
-  margin: 0 0 16px 8px;
-  letter-spacing: 0.5px;
-  transition: color 0.3s ease;
-}
-
-
-@media (max-width: 480px) {
-  .carousel-container {
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 4px 8px;
-  }
-
-  .carousel-container h3 {
-    font-size: 1.2rem;
-    margin-bottom: 8px;
-  }
 }

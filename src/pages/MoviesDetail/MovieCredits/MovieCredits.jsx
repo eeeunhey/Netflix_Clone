@@ -9,7 +9,7 @@ const MovieCredits = ({ id }) => {
 
   const cast = data?.cast ?? [];
   const crew = data?.crew ?? [];
-  console.log("크레딧", data);
+//   console.log("크레딧", data);
 
   // 상위 몇 명만 보여주기 (필요하면 숫자 조절)
   const mainCast = cast.slice(0, 9);

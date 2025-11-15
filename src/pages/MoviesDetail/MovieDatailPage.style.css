@@ -1,67 +1,41 @@
-/* ============================
-   공통: 로딩 / 에러
-============================ */
 
-.detail-loading,
-.detail-error {
-  min-height: 200px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #020617;
-  color: #ffffff;
-}
-
-/* ============================
-   페이지 기본 스타일
-   (라우터에서 전체 페이지로 쓸 때를 대비)
-============================ */
 
 .detail-page {
   min-height: 100vh;
   background-color: #020617;
   color: #ffffff;
-  padding-top: 150px; /* 헤더가 fixed일 때 아래에서 시작하도록 */
+  padding-top: 150px;
 }
 
-/* ============================
-   모달 내부에서 덮어쓰기
-   (MUI Modal + Box에 className="detail-modal-box")
-============================ */
+
 
 .detail-modal-box {
-  background-color: #020617;  /* 모달 카드 배경 */
+  background-color: #020617; 
   border-radius: 16px;
-  overflow: hidden;           /* 모서리 둥글게 & 내용 클립 */
+  overflow: hidden;          
 }
 
-/* 모달 안에서 detail-page는 전체 페이지처럼 굳이 padding-top 필요 없음 */
+
 .detail-modal-box .detail-page {
   min-height: auto;
   padding-top: 0 !important;
   background-color: transparent !important;
 }
 
-/* 닫기 버튼 (MUI Button + className="detail-close-btn") */
-.detail-close-btn {
-  /* 기본 스타일은 sx에서 주고, 여기선 여유가 되면 커스텀 할 수 있음 */
-}
 
-/* ============================
-   상단 Backdrop 헤더
-============================ */
+
 
 .detail-backdrop-header {
   position: relative;
   width: 100%;
-  height: 280px; /* 모바일 기준 높이 */
+  height: 280px; 
 
-  /* 모달 안에서도 예쁘게 보이도록 여유 높이 */
+
 }
 
 @media (min-width: 768px) {
   .detail-backdrop-header {
-    height: 380px; /* 태블릿/데스크탑에서 더 크게 */
+    height: 380px; 
   }
 }
 
@@ -73,10 +47,10 @@
 }
 
 .detail-backdrop-fallback {
-  background-color: #374151; /* 중간 톤 회색 */
+  background-color: #374151; 
 }
 
-/* gradient overlay */
+
 .detail-backdrop-overlay {
   position: absolute;
   inset: 0;
@@ -88,9 +62,7 @@
   );
 }
 
-/* ============================
-   메인 카드 레이아웃 (포스터 + 정보)
-============================ */
+
 
 .detail-main {
   max-width: 1100px;
@@ -102,8 +74,8 @@
   gap: 24px;
 
   position: relative;
-  z-index: 1;          /* 백드롭 오버레이 위로 */
-  margin-top: -120px;  /* 백드롭 위로 살짝 겹치게 */
+  z-index: 1;          
+  margin-top: -120px;  
 }
 
 @media (min-width: 768px) {
@@ -114,9 +86,7 @@
   }
 }
 
-/* ============================
-   포스터 영역
-============================ */
+
 
 .detail-poster-area {
   width: 160px;
@@ -157,9 +127,7 @@
   font-size: 0.85rem;
 }
 
-/* ============================
-   정보 영역 (텍스트)
-============================ */
+
 
 .detail-info-area {
   flex: 1;
